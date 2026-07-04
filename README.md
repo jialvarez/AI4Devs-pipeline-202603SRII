@@ -1,3 +1,29 @@
+## 🚀 Pipeline CI/CD (ejercicio)
+
+Como parte de este ejercicio se implementó un pipeline de GitHub Actions (`.github/workflows/ci.yml`) que se dispara ante cada push a una rama con un Pull Request abierto y ejecuta, en cadena:
+
+1. **Backend Tests**: instala dependencias y ejecuta los tests del backend (`npm test`).
+2. **Backend Build**: compila el backend con TypeScript (`npm run build`) y sube el resultado (incluyendo el schema de Prisma) como artefacto.
+3. **Deploy to EC2**: copia el build a una instancia EC2 por SCP/SSH, genera el cliente de Prisma (`npx prisma generate`) y reinicia el proceso con `pm2`.
+
+Los prompts usados para generar cada paso están documentados en [prompts/prompts-JIAR.md](./prompts/prompts-JIAR.md).
+
+### Evidencias de funcionamiento
+
+**Ejecución completa del pipeline en GitHub Actions:**
+![Pipeline ejecutado con éxito](./screenshots/pipeline-001.png)
+
+**Logs del job de despliegue en EC2 (generación de Prisma Client y reinicio con pm2):**
+![Logs del despliegue en EC2](./screenshots/pipeline-002.png)
+
+**Backend accesible públicamente tras el despliegue:**
+![Backend respondiendo en EC2](./screenshots/pipeline-003.png)
+
+**Contenido desplegado en la instancia EC2:**
+![Archivos desplegados en EC2](./screenshots/pipeline-004.png)
+
+---
+
 # LTI - Talent Tracking System  | EN
 
 This project is a full-stack application with a React frontend and an Express backend using Prisma as an ORM. The frontend is initiated with Create React App, and the backend is written in TypeScript.
