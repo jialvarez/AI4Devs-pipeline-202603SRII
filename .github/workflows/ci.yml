@@ -60,6 +60,7 @@ jobs:
             backend/dist
             backend/package.json
             backend/package-lock.json
+            backend/prisma
 
   deploy:
     name: Deploy to EC2
@@ -91,4 +92,5 @@ jobs:
           script: |
             cd ${{ secrets.EC2_TARGET_DIR }}
             npm ci --omit=dev
+            npx prisma generate
             pm2 restart backend || pm2 start dist/index.js --name backend
